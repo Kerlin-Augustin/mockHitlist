@@ -28,7 +28,7 @@ function App() {
       .post(url, addedCompanyResource)
       .then(response => {
         console.log([response.data])
-        setCompanyList([response.data])
+        setCompanyList(prevList => [...prevList, response.data])
       })
   }
 
