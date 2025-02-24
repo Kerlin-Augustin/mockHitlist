@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Company from './components/Company'
 
@@ -9,6 +9,7 @@ function App() {
   const [addIndustry, setAddIndustry] = useState('')
   const [addApplied, setAddApplied] = useState('')
   const [addDescription, setAddDescription] = useState('')
+  const [companyList, setCompanyList] = useState([])
 
   const url = 'http://localhost:3001/company'
 
@@ -26,9 +27,28 @@ function App() {
     axios
       .post(url, addedCompanyResource)
       .then(response => {
-        console.log(response.data)
+        console.log([response.data])
+        setCompanyList([response.data])
       })
   }
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then(response => {
+        setCompanyList(response.data || [])
+      })
+  }, [])
+
+  const allCompany = companyList?.map(company => (
+    <Company
+      key={company.id}
+      company={company.company}
+      location={company.location}
+      industry={company.industry}
+      applied={company.applied}
+      description={company.description} />
+  )) || null
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
@@ -54,7 +74,7 @@ function App() {
         </>
       </div>
       <h2>Companies</h2>
-      <Company />
+      {allCompany}
     </>
   )
 }
