@@ -1,5 +1,28 @@
 {
   "company": [
-    
+    {
+      "id": "3169",
+      "company": "Stelr",
+      "location": "Boston",
+      "industry": "Fintech",
+      "applied": "No",
+      "description": "Cross boarder money transfer"
+    },
+    {
+      "id": "c405",
+      "company": "Talent Bridge",
+      "location": "Boston",
+      "industry": "SaaS",
+      "applied": "Yes",
+      "description": "Helping people find jobs"
+    },
+    {
+      "id": "8835",
+      "company": "goSavant",
+      "location": "New York",
+      "industry": "Fintech",
+      "applied": "Yes",
+      "description": "N/A"
+    }
   ]
 }

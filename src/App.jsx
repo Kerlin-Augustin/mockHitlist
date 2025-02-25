@@ -30,8 +30,13 @@ function App() {
         console.log([response.data])
         setCompanyList(prevList => [...prevList, response.data])
       })
-  }
-
+      setAddCompany('')
+      setAddLocation('')
+      setAddIndustry('')
+      setAddApplied('')
+      setAddDescription('')
+    }
+    
   useEffect(() => {
     axios
       .get(url)
@@ -52,6 +57,9 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
+    allCompany.filter(company => {
+      setAddCompany(company)
+    })
   }
 
   return (
@@ -69,6 +77,10 @@ function App() {
           <h3>Add company</h3>
           <form onSubmit={handleAddCompany}>
             <input value={addCompany} placeholder="Add Company" type='text' onChange={(e) => setAddCompany(e.target.value)} />
+            <input value={addLocation} placeholder="Location" type='text' onChange={(e) => setAddLocation(e.target.value)} />
+            <input value={addIndustry} placeholder="Industry" type='text' onChange={(e) => setAddIndustry(e.target.value)} />
+            <input value={addApplied} placeholder="Applied" type='text' onChange={(e) => setAddApplied(e.target.value)} />
+            <input value={addDescription} placeholder="Description" type='text' onChange={(e) => setAddDescription(e.target.value)} />
             <input type='submit' />
           </form>
         </>
