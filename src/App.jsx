@@ -18,12 +18,19 @@ function App() {
     axios
       .get(url)
       .then(response => {
-        setCompanyList(response.data || [])
+        const data = response.data || []
+        setFilteredList(data)
+        setCompanyList(data)
       })
       .catch(err => {
-        throw new Error(`There was an error. Maybe something to do with this: ${err}`)
+        console.error(`There was an error. Maybe something to do with this: ${err}`)
       })
   }, [])
+
+  const handleDeleteCompany = (id) => {
+    setCompanyList(prevList => prevList.filter(company => company.id !== id))
+    setFilteredList(prevList => prevList.filter(company => company.id !== id))
+  }
 
   const handleAddCompany = (e) => {
     e.preventDefault()
@@ -51,18 +58,21 @@ function App() {
 
   const allCompany = filteredList?.map(company => (
     <Company
+      id={company.id}
       key={company.id}
       company={company.company}
       location={company.location}
       industry={company.industry}
       applied={company.applied}
-      description={company.description} />
+      description={company.description}
+      onDelete={handleDeleteCompany}
+    />
   )) || null
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
 
-    if(searchCompany.trim() === ''){
+    if (searchCompany.trim() === '') {
       setFilteredList(companyList)
       return
     }
