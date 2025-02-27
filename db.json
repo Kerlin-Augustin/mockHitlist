@@ -23,6 +23,30 @@
       "industry": "Fintech",
       "applied": "Yes",
       "description": "N/A"
+    },
+    {
+      "id": "ac22",
+      "company": "gogoDuck",
+      "location": "Boston",
+      "industry": "SaaS",
+      "applied": "No",
+      "description": "N/A"
+    },
+    {
+      "id": "cac3",
+      "company": "halo",
+      "location": "New Hampshire",
+      "industry": "",
+      "applied": "",
+      "description": ""
+    },
+    {
+      "id": "587d",
+      "company": "marina",
+      "location": "boston",
+      "industry": "aquatech",
+      "applied": "yes",
+      "description": "n/a"
     }
   ]
 }

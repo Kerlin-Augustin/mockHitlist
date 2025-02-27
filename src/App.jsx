@@ -10,8 +10,17 @@ function App() {
   const [addApplied, setAddApplied] = useState('')
   const [addDescription, setAddDescription] = useState('')
   const [companyList, setCompanyList] = useState([])
+  const [filteredList, setFilteredList] = useState([])
 
   const url = 'http://localhost:3001/company'
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then(response => {
+        setCompanyList(response.data || [])
+      })
+  }, [])
 
   const handleAddCompany = (e) => {
     e.preventDefault()
@@ -30,22 +39,14 @@ function App() {
         console.log([response.data])
         setCompanyList(prevList => [...prevList, response.data])
       })
-      setAddCompany('')
-      setAddLocation('')
-      setAddIndustry('')
-      setAddApplied('')
-      setAddDescription('')
-    }
-    
-  useEffect(() => {
-    axios
-      .get(url)
-      .then(response => {
-        setCompanyList(response.data || [])
-      })
-  }, [])
+    setAddCompany('')
+    setAddLocation('')
+    setAddIndustry('')
+    setAddApplied('')
+    setAddDescription('')
+  }
 
-  const allCompany = companyList?.map(company => (
+  const allCompany = filteredList?.map(company => (
     <Company
       key={company.id}
       company={company.company}
@@ -57,9 +58,18 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    allCompany.filter(company => {
-      setAddCompany(company)
+
+    if(searchCompany.trim() === ''){
+      setFilteredList(companyList)
+      return
+    }
+
+    const filteredCompanies = companyList.filter(company => {
+      return company.location.toLowerCase().includes(searchCompany.toLowerCase())
     })
+
+    setFilteredList(filteredCompanies)
+    
   }
 
   return (
@@ -69,7 +79,7 @@ function App() {
         <>
           <h3>Search company</h3>
           <form onSubmit={handleSearchSubmit}>
-            <input value={searchCompany} placeholder="Search Company" type='text' onChange={(e) => setSearchCompany(e.target.value)} />
+            <input value={searchCompany} placeholder="Company Location" type='text' onChange={(e) => setSearchCompany(e.target.value)} />
             <input type='submit' />
           </form>
         </>
