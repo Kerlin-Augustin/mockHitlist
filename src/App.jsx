@@ -20,6 +20,9 @@ function App() {
       .then(response => {
         setCompanyList(response.data || [])
       })
+      .catch(err => {
+        throw new Error(`There was an error. Maybe something to do with this: ${err}`)
+      })
   }, [])
 
   const handleAddCompany = (e) => {
@@ -69,7 +72,6 @@ function App() {
     })
 
     setFilteredList(filteredCompanies)
-    
   }
 
   return (
@@ -84,7 +86,7 @@ function App() {
           </form>
         </>
         <>
-          <h3>Add company</h3>
+          <h3>Add Company</h3>
           <form onSubmit={handleAddCompany}>
             <input value={addCompany} placeholder="Add Company" type='text' onChange={(e) => setAddCompany(e.target.value)} />
             <input value={addLocation} placeholder="Location" type='text' onChange={(e) => setAddLocation(e.target.value)} />
