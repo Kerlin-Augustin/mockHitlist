@@ -12,7 +12,7 @@ function App() {
   const [companyList, setCompanyList] = useState([])
   const [filteredList, setFilteredList] = useState([])
 
-  const url = 'http://localhost:3001/company'
+  const url = 'http://localhost:3000/note'
 
   useEffect(() => {
     axios
