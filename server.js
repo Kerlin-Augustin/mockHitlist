@@ -26,15 +26,7 @@ const companySchema = new mongoose.Schema({
 
 const Company = mongoose.model('Company', companySchema)
 
-// const note = new Note({
-//   company: "gogoDuck",
-//   location: "Boston",
-//   industry: "SaaS",
-//   applied: false,
-//   description: "N/A"
-// })
-
-app.get("/note", async (req, res) => {
+app.get("/company", async (req, res) => {
   try {
     const companies = await Company.find({});
     res.json(companies);
@@ -43,7 +35,7 @@ app.get("/note", async (req, res) => {
   }
 });
 
-app.post("/note", async (req, res) => {
+app.post("/company", async (req, res) => {
   try {
     const newCompany = new Company(req.body);
     const savedCompany = await newCompany.save();
