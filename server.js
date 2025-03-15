@@ -9,6 +9,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Mongo DB connection link
 const MONGO_URI = process.env.MONGO_URI
 
 mongoose.connect(MONGO_URI)
